@@ -1,7 +1,10 @@
 #include "PrescriptionBatchModel.h"
 
+using namespace std;
+
 PrescriptionBatchModel::PrescriptionBatchModel(QObject *parent):
-    QAbstractTableModel(parent)
+    QAbstractTableModel(parent),
+    mBatches(new vector<unique_ptr<PrescriptionBatch>>())
 {
 
 }
@@ -45,7 +48,7 @@ QVariant PrescriptionBatchModel::data(const QModelIndex &index, int role) const
     }
 }
 
-void PrescriptionBatchModel::setModel(std::unique_ptr<std::vector<std::unique_ptr<PrescriptionBatch>>> batches)
+void PrescriptionBatchModel::setModel(unique_ptr<vector<unique_ptr<PrescriptionBatch>>> batches)
 {
     beginResetModel();
     mBatches = move(batches);

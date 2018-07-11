@@ -25,7 +25,16 @@ unique_ptr<vector<unique_ptr<PrescriptionOrder>>> PrescriptionOrderDao::orders()
                         new PrescriptionOrder(
                             query.value("id").toInt(),
                             query.value("techid").toString(),
-                            query.value("orderNumber").toString()
+                            query.value("orderNumber").toString(),
+                            query.value("dateCreated").toDateTime(),
+                            query.value("dateDeleted").toDateTime(),
+                            query.value("reportNumber").toString(),
+                            query.value("companyLogo").toString(),
+                            query.value("templateImage1").toString(),
+                            query.value("templateImage2").toString(),
+                            query.value("templateImage3").toString(),
+                            query.value("templateImage4").toString(),
+                            query.value("printMethodOnScanTray").toString()
                             ));
 
             list->push_back(move(item));

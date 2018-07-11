@@ -3,17 +3,31 @@
 
 #include "PrescriptionOrderModel.h"
 #include "DbController.h"
+#include "FilterWidget.h"
+#include "MySortFilterProxyModel.h"
+
+#include <QRegExp>
 
 PrescriptionOrderWidget::PrescriptionOrderWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::PrescriptionOrderWidget)
   , mModel(new PrescriptionOrderModel())
+  , mFilterWidget(new FilterWidget())
+  , mProxyModel(new MySortFilterProxyModel(this))
 {
     ui->setupUi(this);
     connect(ui->load_pushButton, &QPushButton::clicked, this, &PrescriptionOrderWidget::load);
     connect(ui->select_pushButton, &QPushButton::clicked, this, &PrescriptionOrderWidget::select);
 
-    ui->tableView->setModel(mModel);
+    ui->filter_horizontalLayout->addWidget(mFilterWidget);    
+
+    ui->tableView->setModel(mProxyModel);
+
+    mProxyModel->setSourceModel(mModel);
+
+    connect(mFilterWidget, &FilterWidget::filterChanged, this, &PrescriptionOrderWidget::textFilterChanged);
+    connect(mFilterWidget, &QLineEdit::textChanged,
+            this, &PrescriptionOrderWidget::textFilterChanged);
 }
 
 PrescriptionOrderWidget::~PrescriptionOrderWidget()
@@ -42,6 +56,17 @@ void PrescriptionOrderWidget::select()
     if(!techId.isNull() && !techId.isEmpty()){
         emit selected(techId,id);
     }
+
+}
+
+void PrescriptionOrderWidget::textFilterChanged()
+{
+    QRegExp regExp(mFilterWidget->text(), mFilterWidget->caseSensitivity(),mFilterWidget->patternSyntax());
+    mProxyModel->setFilterRegExp(regExp);
+}
+
+void PrescriptionOrderWidget::dateFilterChanged()
+{
 
 }
 

@@ -19,7 +19,20 @@
      <property name="selectionMode">
       <enum>QAbstractItemView::SingleSelection</enum>
      </property>
+     <property name="sortingEnabled">
+      <bool>true</bool>
+     </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="filter_horizontalLayout">
+     <item>
+      <widget class="QDateTimeEdit" name="from_dateTimeEdit"/>
+     </item>
+     <item>
+      <widget class="QDateTimeEdit" name="to_dateTimeEdit"/>
+     </item>
+    </layout>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">

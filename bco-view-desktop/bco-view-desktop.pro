@@ -27,12 +27,14 @@ SOURCES += \
         main.cpp \
         MainWindow.cpp \
     PrescriptionOrderWidget.cpp \
-    PrescriptionBatchWidget.cpp
+    PrescriptionBatchWidget.cpp \
+    FilterWidget.cpp
 
 HEADERS += \
         MainWindow.h \
     PrescriptionOrderWidget.h \
-    PrescriptionBatchWidget.h
+    PrescriptionBatchWidget.h \
+    FilterWidget.h
 
 FORMS += \
         MainWindow.ui \
@@ -44,3 +46,6 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../bco-view-core/de
 
 INCLUDEPATH += $$PWD/../bco-view-core
 DEPENDPATH += $$PWD/../bco-view-core
+
+RESOURCES += \
+    resource.qrc

@@ -31,7 +31,8 @@ SOURCES += \
     PrescriptionOrderDao.cpp \
     PrescriptionBatch.cpp \
     PrescriptionBatchDao.cpp \
-    PrescriptionBatchModel.cpp
+    PrescriptionBatchModel.cpp \
+    MySortFilterProxyModel.cpp
 
 HEADERS += \
         DbController.h \
@@ -41,7 +42,8 @@ HEADERS += \
     PrescriptionOrderDao.h \
     PrescriptionBatch.h \
     PrescriptionBatchDao.h \
-    PrescriptionBatchModel.h
+    PrescriptionBatchModel.h \
+    MySortFilterProxyModel.h
 
 unix {
     target.path = /usr/lib
