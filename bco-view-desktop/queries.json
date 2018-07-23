@@ -1,0 +1,15 @@
+[
+    {
+        "Description": "Production tray with evidence",
+        "Query": "select TOP 100 pt.Id ProductionTrayId ,pc.Id ProductionContainerId, ec.Id EvidenceContainerId, o.Id ObservationId, oe.Id ObservationEvidenceId from ProductionTray pt inner join ProductionContainer pc on pt.Id = pc.FK_ProductionTray inner join PrescriptionContainer pc2 on pc.FK_PrescriptionContainer = pc2.Id inner join EvidenceContainer ec on pc.Id = ec.FK_ProductionContainer inner join Observation o on o.Id = ec.FK_Observation_Id inner join ObservationEvidence oe on oe.FK_Observation_Id = o.Id inner join ObservationImage oi on oe.Id = oi.FK_ObservationEvidence_Id where oi.[Image] is not null and pt.DateDeleted is null and pc.DateDeleted is null order by pt.DateCreated desc"
+    },
+    {
+        "Description": "Production tray with status",
+        "Query": "select top 500 pt.Id ProductionTrayId, pt.DateDeleted, ptst.Synopsis, pb.BatchNumber, po.OrderNumber from ProductionTray pt inner join PrescriptionTray pt2 on pt.FK_PrescriptionTray = pt2.Id inner join PrescriptionBatch pb on pt2.FK_PrescriptionBatch = pb.Id inner join PrescriptionOrder po on pb.FK_PrescriptionOrder = po.Id inner join ProductionTrayStatus pts on pt.Id = pts.FK_ProductionTray inner join( select FK_ProductionTray,Max(Id) as StatusId from ProductionTrayStatus where DateDeleted is null group by FK_ProductionTray) latestStatus on pts.id = latestStatus.StatusId inner join ProductionTrayStatusType ptst on pts.FK_ProductionTrayStatusType = ptst.Id order by pt.Id desc "
+    },
+    {
+        "Description": "Production container with status",
+        "Query": " select pc.Id ProductionContainerId, pc.DateDeleted, pcst.Synopsis, pc.FK_ProductionTray ProductionTrayId, pc.FK_PrescriptionContainer PrescriptionContainerId from ProductionContainer pc inner join ProductionContainerStatus pcs on pc.id = pcs.FK_ProductionContainer inner join ProductionContainerStatusType pcst on pcs.FK_ProductionContainerStatusType = pcst.Id inner join( select FK_ProductionContainer,Max(Id) as StatusId from ProductionContainerStatus where DateDeleted is null group by FK_ProductionContainer) latestStatus2 on pcs.id = latestStatus2.StatusId "
+    }
+]
+

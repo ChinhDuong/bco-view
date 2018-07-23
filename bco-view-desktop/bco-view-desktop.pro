@@ -26,20 +26,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         MainWindow.cpp \
-    PrescriptionOrderWidget.cpp \
-    PrescriptionBatchWidget.cpp \
-    FilterWidget.cpp
+    VbmTableWidget.cpp \
+    VbmQueryWidget.cpp \
+    VbmQueryInfo.cpp \
+    VbmQueryModel.cpp
 
 HEADERS += \
         MainWindow.h \
-    PrescriptionOrderWidget.h \
-    PrescriptionBatchWidget.h \
-    FilterWidget.h
+    VbmTableWidget.h \
+    VbmQueryWidget.h \
+    VbmQueryInfo.h \
+    VbmQueryModel.h
 
 FORMS += \
         MainWindow.ui \
-    PrescriptionOrderWidget.ui \
-    PrescriptionBatchWidget.ui
+    VbmTableWidget.ui \
+    VbmQueryWidget.ui
 
 win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../bco-view-core/release/ -lbco-view-core
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../bco-view-core/debug/ -lbco-view-core
@@ -49,3 +51,6 @@ DEPENDPATH += $$PWD/../bco-view-core
 
 RESOURCES += \
     resource.qrc
+
+DISTFILES += \
+    queries.json
