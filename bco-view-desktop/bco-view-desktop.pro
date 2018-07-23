@@ -53,4 +53,5 @@ RESOURCES += \
     resource.qrc
 
 DISTFILES += \
-    queries.json
+    queries.json \
+    connections.json

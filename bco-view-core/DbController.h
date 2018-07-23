@@ -5,36 +5,36 @@
 
 #include <QString>
 #include <QtSql>
-#include "PrescriptionBatchDao.h"
-#include "PrescriptionOrderDao.h"
 
-class BCOVIEWCORESHARED_EXPORT DbController: public QObject
-{    
+class BCOVIEWCORESHARED_EXPORT DbController: public QObject {
     Q_OBJECT
-public:
+  public:
     static DbController& instance();
     ~DbController();
     bool checkIfConnected();
-protected:
-    DbController(QObject* parent=0);
+  protected:
+    DbController(QObject* parent = 0);
     DbController& operator=(const DbController& rhs);
-public slots:
+  public slots:
     void connectToServerRequested(QString);
     void disconnectFromServerRequested();
-
-signals:
+    void selectTableRequested(QString table);
+  signals:
     void serverConnected();
     void serverErrorWithConnection(QString);
     void serverDisconnected();
-
-private:
+    void tableSelected(QSqlQueryModel*);
+    void gotTablesNames(QStringList tableNames);
+  private:
     bool connectToServerMSSQL(QString);
-    void disconnectFromServer();    
-    QSqlError       getLastError();
+    void disconnectFromServer();
+    QSqlError getLastError();
 
     std::unique_ptr<QSqlDatabase> mDatabase;
-public:
-    PrescriptionOrderDao prescriptionOrderDao;
-    PrescriptionBatchDao prescriptionBatchDao;
+  public :
+    QSqlQueryModel* selectTable(QString query);
+    QStringList getTableNames();
+
+
 };
 #endif // DBCONTROLLER_H

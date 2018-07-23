@@ -25,25 +25,11 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        DbController.cpp \
-    PrescriptionOrder.cpp \
-    PrescriptionOrderModel.cpp \
-    PrescriptionOrderDao.cpp \
-    PrescriptionBatch.cpp \
-    PrescriptionBatchDao.cpp \
-    PrescriptionBatchModel.cpp \
-    MySortFilterProxyModel.cpp
+        DbController.cpp
 
 HEADERS += \
         DbController.h \
-        bco-view-core_global.h \ 
-    PrescriptionOrder.h \
-    PrescriptionOrderModel.h \
-    PrescriptionOrderDao.h \
-    PrescriptionBatch.h \
-    PrescriptionBatchDao.h \
-    PrescriptionBatchModel.h \
-    MySortFilterProxyModel.h
+        bco-view-core_global.h  
 
 unix {
     target.path = /usr/lib
